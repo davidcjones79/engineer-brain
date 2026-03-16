@@ -591,8 +591,12 @@ footer {
   <p class="subtitle">There are 25 million engineers in the world. They've built everything you use. They cannot, however, reply to a text message within 48 hours. This site is for everyone who lives with, works with, or accidentally dated one.</p>
   <div class="cta-row">
     <a href="#idea" class="btn btn-primary">Begin diagnosis →</a>
+    <button class="btn btn-ghost" id="listen-btn" onclick="toggleAudio()">
+      <span id="listen-icon">🔊</span> Listen
+    </button>
     <a href="#faq" class="btn btn-ghost">Skip to FAQ</a>
   </div>
+  <audio id="hero-audio" src="hero.mp3" preload="auto"></audio>
   <div class="scroll-hint">↓ scroll to explore</div>
 </header>
 
@@ -910,6 +914,31 @@ footer {
 </footer>
 
 <script>
+// Listen button
+const heroAudio = document.getElementById('hero-audio');
+function toggleAudio() {
+  const btn = document.getElementById('listen-btn');
+  const icon = document.getElementById('listen-icon');
+  if (heroAudio.paused) {
+    heroAudio.play();
+    icon.textContent = '\u23F8';
+    btn.innerHTML = '<span id="listen-icon">\u23F8</span> Playing…';
+    btn.style.borderColor = 'rgba(255,107,53,0.4)';
+    btn.style.color = 'var(--accent)';
+  } else {
+    heroAudio.pause();
+    btn.innerHTML = '<span id="listen-icon">\uD83D\uDD0A</span> Listen';
+    btn.style.borderColor = '';
+    btn.style.color = '';
+  }
+}
+heroAudio.addEventListener('ended', () => {
+  const btn = document.getElementById('listen-btn');
+  btn.innerHTML = '<span id="listen-icon">\uD83D\uDD0A</span> Listen';
+  btn.style.borderColor = '';
+  btn.style.color = '';
+});
+
 // Hero typewriter
 (function() {
   const segments = [
