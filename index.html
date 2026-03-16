@@ -775,6 +775,13 @@ footer {
       <div class="stat-label">Ratio of time coding to time configuring their editor</div>
     </div>
   </div>
+
+  <div style="text-align:center;margin-top:2rem;">
+    <button class="btn btn-ghost" id="s04-listen-btn" onclick="toggleS04Audio()">
+      <span id="s04-listen-icon">🔊</span> Listen
+    </button>
+    <audio id="s04-audio" src="section04.mp3" preload="auto"></audio>
+  </div>
 </section>
 
 <hr class="section-divider">
@@ -956,6 +963,29 @@ function toggleAudio() {
 heroAudio.addEventListener('ended', () => {
   const btn = document.getElementById('listen-btn');
   btn.innerHTML = '<span id="listen-icon">\uD83D\uDD0A</span> Listen';
+  btn.style.borderColor = '';
+  btn.style.color = '';
+});
+
+// Section 04 listen button
+const s04Audio = document.getElementById('s04-audio');
+function toggleS04Audio() {
+  const btn = document.getElementById('s04-listen-btn');
+  if (s04Audio.paused) {
+    s04Audio.play();
+    btn.innerHTML = '<span id="s04-listen-icon">\u23F8</span> Playing\u2026';
+    btn.style.borderColor = 'rgba(255,107,53,0.4)';
+    btn.style.color = 'var(--accent)';
+  } else {
+    s04Audio.pause();
+    btn.innerHTML = '<span id="s04-listen-icon">\uD83D\uDD0A</span> Listen';
+    btn.style.borderColor = '';
+    btn.style.color = '';
+  }
+}
+s04Audio.addEventListener('ended', () => {
+  const btn = document.getElementById('s04-listen-btn');
+  btn.innerHTML = '<span id="s04-listen-icon">\uD83D\uDD0A</span> Listen';
   btn.style.borderColor = '';
   btn.style.color = '';
 });
