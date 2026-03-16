@@ -699,7 +699,7 @@ footer {
 <!-- SECTION 03 -->
 <section id="stages">
   <div class="section-label">03 — How it works</div>
-  <h2>The Engineer Decision Process, <em>explained like you're 17.</em></h2>
+  <h2>The Engineer Decision Process, <em>with no whiteboard available.</em></h2>
   <p class="lead">An engineer's brain processes every decision through an elaborate pipeline that would be impressive if it didn't take 4x longer than just doing the thing.</p>
 
   <div class="steps">
@@ -731,6 +731,13 @@ footer {
         <p>Begin building. Encounter an edge case. Redesign everything. Encounter another edge case. Consult a rubber duck. The duck has no answers. Question career choices. Push to production at 2am. It works. No one knows why. Never touch it again.</p>
       </div>
     </div>
+  </div>
+
+  <div style="text-align:center;margin-top:2rem;">
+    <button class="btn btn-ghost" id="s03-listen-btn" onclick="toggleS03Audio()">
+      <span id="s03-listen-icon">🔊</span> Listen
+    </button>
+    <audio id="s03-audio" src="section03.mp3" preload="auto"></audio>
   </div>
 </section>
 
@@ -949,6 +956,29 @@ function toggleAudio() {
 heroAudio.addEventListener('ended', () => {
   const btn = document.getElementById('listen-btn');
   btn.innerHTML = '<span id="listen-icon">\uD83D\uDD0A</span> Listen';
+  btn.style.borderColor = '';
+  btn.style.color = '';
+});
+
+// Section 03 listen button
+const s03Audio = document.getElementById('s03-audio');
+function toggleS03Audio() {
+  const btn = document.getElementById('s03-listen-btn');
+  if (s03Audio.paused) {
+    s03Audio.play();
+    btn.innerHTML = '<span id="s03-listen-icon">\u23F8</span> Playing\u2026';
+    btn.style.borderColor = 'rgba(255,107,53,0.4)';
+    btn.style.color = 'var(--accent)';
+  } else {
+    s03Audio.pause();
+    btn.innerHTML = '<span id="s03-listen-icon">\uD83D\uDD0A</span> Listen';
+    btn.style.borderColor = '';
+    btn.style.color = '';
+  }
+}
+s03Audio.addEventListener('ended', () => {
+  const btn = document.getElementById('s03-listen-btn');
+  btn.innerHTML = '<span id="s03-listen-icon">\uD83D\uDD0A</span> Listen';
   btn.style.borderColor = '';
   btn.style.color = '';
 });
