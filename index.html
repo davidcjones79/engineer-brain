@@ -114,7 +114,19 @@ nav ul li a:hover { color: var(--text); }
   max-width: 800px;
   font-weight: 400;
   position: relative;
-  animation: fadeInUp 0.8s ease 0.15s both;
+  min-height: 1.15em;
+}
+.hero h1 .cursor {
+  display: inline-block;
+  width: 3px;
+  height: 0.9em;
+  background: var(--accent);
+  margin-left: 2px;
+  vertical-align: text-bottom;
+  animation: blink 0.6s step-end infinite;
+}
+@keyframes blink {
+  50% { opacity: 0; }
 }
 .hero h1 em {
   font-style: italic;
@@ -126,12 +138,20 @@ nav ul li a:hover { color: var(--text); }
   max-width: 540px;
   margin-top: 1.5rem;
   line-height: 1.8;
-  animation: fadeInUp 0.8s ease 0.3s both;
+  opacity: 0;
+  transform: translateY(20px);
+}
+.hero .subtitle.show {
+  animation: fadeInUp 0.8s ease both;
 }
 .hero .cta-row {
   display: flex; gap: 1rem;
   margin-top: 2.5rem;
-  animation: fadeInUp 0.8s ease 0.45s both;
+  opacity: 0;
+  transform: translateY(20px);
+}
+.hero .cta-row.show {
+  animation: fadeInUp 0.8s ease 0.15s both;
 }
 .btn {
   display: inline-flex; align-items: center; gap: 0.5rem;
@@ -567,7 +587,7 @@ footer {
 <!-- HERO -->
 <header class="hero">
   <div class="badge">⚠ A Public Service Announcement</div>
-  <h1>One species figured out how to mass-produce <em>overthinking.</em> Their code compiles. Their social skills don't.</h1>
+  <h1 id="hero-title"></h1>
   <p class="subtitle">There are 25 million engineers in the world. They've built everything you use. They cannot, however, reply to a text message within 48 hours. This site is for everyone who lives with, works with, or accidentally dated one.</p>
   <div class="cta-row">
     <a href="#idea" class="btn btn-primary">Begin diagnosis →</a>
@@ -890,6 +910,77 @@ footer {
 </footer>
 
 <script>
+// Hero typewriter
+(function() {
+  const segments = [
+    { text: 'One species figured out how to mass-produce ', tag: null },
+    { text: 'overthinking.', tag: 'em' },
+    { text: ' Their code compiles. Their social skills don\'t.', tag: null },
+  ];
+  const h1 = document.getElementById('hero-title');
+  const cursor = document.createElement('span');
+  cursor.className = 'cursor';
+  h1.appendChild(cursor);
+
+  let segIdx = 0, charIdx = 0;
+  let currentEl = null;
+
+  function type() {
+    if (segIdx >= segments.length) {
+      // Done typing — remove cursor after a beat, reveal subtitle + CTA
+      setTimeout(() => {
+        cursor.style.animation = 'none';
+        cursor.style.transition = 'opacity 0.4s';
+        cursor.style.opacity = '0';
+        setTimeout(() => cursor.remove(), 400);
+        document.querySelector('.hero .subtitle').classList.add('show');
+        document.querySelector('.hero .cta-row').classList.add('show');
+        document.querySelector('.scroll-hint').style.animation = 'fadeInUp 0.8s ease 0.3s both';
+      }, 400);
+      return;
+    }
+
+    const seg = segments[segIdx];
+
+    if (charIdx === 0 && seg.tag) {
+      currentEl = document.createElement(seg.tag);
+      h1.insertBefore(currentEl, cursor);
+    }
+
+    const target = seg.tag ? currentEl : h1;
+    if (!seg.tag) {
+      // Insert text node before cursor
+      const textNode = cursor.previousSibling;
+      if (textNode && textNode.nodeType === 3) {
+        textNode.textContent += seg.text[charIdx];
+      } else {
+        h1.insertBefore(document.createTextNode(seg.text[charIdx]), cursor);
+      }
+    } else {
+      currentEl.textContent += seg.text[charIdx];
+    }
+
+    charIdx++;
+    if (charIdx >= seg.text.length) {
+      segIdx++;
+      charIdx = 0;
+      currentEl = null;
+    }
+
+    // Vary speed: faster for regular chars, small pause after punctuation
+    const ch = seg.text[charIdx - 1];
+    const delay = '.!,'.includes(ch) ? 120 : Math.random() * 25 + 28;
+    setTimeout(type, delay);
+  }
+
+  // Start after badge animation
+  setTimeout(type, 900);
+
+  // Hide scroll hint until typing done
+  document.querySelector('.scroll-hint').style.opacity = '0';
+  document.querySelector('.scroll-hint').style.animation = 'none';
+})();
+
 // Share modal
 function openShareModal() {
   const overlay = document.createElement('div');
