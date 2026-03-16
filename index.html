@@ -897,6 +897,13 @@ footer {
       <cite>— Abraham Lincoln, if he'd been a software engineer</cite>
     </div>
   </div>
+
+  <div style="text-align:center;margin-top:2rem;">
+    <button class="btn btn-ghost" id="s06-listen-btn" onclick="toggleS06Audio()">
+      <span id="s06-listen-icon">🔊</span> Listen
+    </button>
+    <audio id="s06-audio" src="section06.mp3" preload="auto"></audio>
+  </div>
 </section>
 
 <hr class="section-divider">
@@ -970,6 +977,29 @@ function toggleAudio() {
 heroAudio.addEventListener('ended', () => {
   const btn = document.getElementById('listen-btn');
   btn.innerHTML = '<span id="listen-icon">\uD83D\uDD0A</span> Listen';
+  btn.style.borderColor = '';
+  btn.style.color = '';
+});
+
+// Section 06 listen button
+const s06Audio = document.getElementById('s06-audio');
+function toggleS06Audio() {
+  const btn = document.getElementById('s06-listen-btn');
+  if (s06Audio.paused) {
+    s06Audio.play();
+    btn.innerHTML = '<span id="s06-listen-icon">\u23F8</span> Playing\u2026';
+    btn.style.borderColor = 'rgba(255,107,53,0.4)';
+    btn.style.color = 'var(--accent)';
+  } else {
+    s06Audio.pause();
+    btn.innerHTML = '<span id="s06-listen-icon">\uD83D\uDD0A</span> Listen';
+    btn.style.borderColor = '';
+    btn.style.color = '';
+  }
+}
+s06Audio.addEventListener('ended', () => {
+  const btn = document.getElementById('s06-listen-btn');
+  btn.innerHTML = '<span id="s06-listen-icon">\uD83D\uDD0A</span> Listen';
   btn.style.borderColor = '';
   btn.style.color = '';
 });
