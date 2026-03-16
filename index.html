@@ -685,6 +685,13 @@ footer {
       <p>Finally admits the real architecture was the friends they debugged with along the way. Still refuses to use a GUI when a terminal command exists. Will die on this hill.</p>
     </div>
   </div>
+
+  <div style="text-align:center;margin-top:2rem;">
+    <button class="btn btn-ghost" id="s02-listen-btn" onclick="toggleS02Audio()">
+      <span id="s02-listen-icon">🔊</span> Listen
+    </button>
+    <audio id="s02-audio" src="section02.mp3" preload="auto"></audio>
+  </div>
 </section>
 
 <hr class="section-divider">
@@ -942,6 +949,29 @@ function toggleAudio() {
 heroAudio.addEventListener('ended', () => {
   const btn = document.getElementById('listen-btn');
   btn.innerHTML = '<span id="listen-icon">\uD83D\uDD0A</span> Listen';
+  btn.style.borderColor = '';
+  btn.style.color = '';
+});
+
+// Section 02 listen button
+const s02Audio = document.getElementById('s02-audio');
+function toggleS02Audio() {
+  const btn = document.getElementById('s02-listen-btn');
+  if (s02Audio.paused) {
+    s02Audio.play();
+    btn.innerHTML = '<span id="s02-listen-icon">\u23F8</span> Playing\u2026';
+    btn.style.borderColor = 'rgba(255,107,53,0.4)';
+    btn.style.color = 'var(--accent)';
+  } else {
+    s02Audio.pause();
+    btn.innerHTML = '<span id="s02-listen-icon">\uD83D\uDD0A</span> Listen';
+    btn.style.borderColor = '';
+    btn.style.color = '';
+  }
+}
+s02Audio.addEventListener('ended', () => {
+  const btn = document.getElementById('s02-listen-btn');
+  btn.innerHTML = '<span id="s02-listen-icon">\uD83D\uDD0A</span> Listen';
   btn.style.borderColor = '';
   btn.style.color = '';
 });
