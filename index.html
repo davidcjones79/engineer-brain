@@ -945,6 +945,12 @@ footer {
 <div class="cta-section">
   <h2>Still here? Impressive attention span for an engineer.</h2>
   <p>Share this with the engineer in your life. They'll spend 20 minutes explaining why the site's CSS could be "more performant" instead of acknowledging they feel seen.</p>
+  <div style="margin-top:1.5rem;">
+    <button class="btn btn-ghost" id="outro-listen-btn" onclick="toggleOutroAudio()">
+      <span id="outro-listen-icon">🔊</span> Listen
+    </button>
+    <audio id="outro-audio" src="outro.mp3" preload="auto"></audio>
+  </div>
   <div class="cta-row">
     <a href="#" class="btn btn-primary" onclick="openShareModal(); return false;">Share with an engineer</a>
     <a href="#" class="btn btn-ghost" id="src-btn" onclick="runSourceCode(); return false;">View source code</a>
@@ -977,6 +983,29 @@ function toggleAudio() {
 heroAudio.addEventListener('ended', () => {
   const btn = document.getElementById('listen-btn');
   btn.innerHTML = '<span id="listen-icon">\uD83D\uDD0A</span> Listen';
+  btn.style.borderColor = '';
+  btn.style.color = '';
+});
+
+// Outro listen button
+const outroAudio = document.getElementById('outro-audio');
+function toggleOutroAudio() {
+  const btn = document.getElementById('outro-listen-btn');
+  if (outroAudio.paused) {
+    outroAudio.play();
+    btn.innerHTML = '<span id="outro-listen-icon">\u23F8</span> Playing\u2026';
+    btn.style.borderColor = 'rgba(255,107,53,0.4)';
+    btn.style.color = 'var(--accent)';
+  } else {
+    outroAudio.pause();
+    btn.innerHTML = '<span id="outro-listen-icon">\uD83D\uDD0A</span> Listen';
+    btn.style.borderColor = '';
+    btn.style.color = '';
+  }
+}
+outroAudio.addEventListener('ended', () => {
+  const btn = document.getElementById('outro-listen-btn');
+  btn.innerHTML = '<span id="outro-listen-icon">\uD83D\uDD0A</span> Listen';
   btn.style.borderColor = '';
   btn.style.color = '';
 });
