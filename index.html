@@ -640,6 +640,13 @@ footer {
       <p>You research IoT-enabled smart switches. You order a Raspberry Pi. You write a custom firmware. You set up Home Assistant. Your spouse leaves. The original light switch is still broken. Total time elapsed: 3 weekends. Emotional damage: catastrophic.</p>
     </div>
   </div>
+
+  <div style="text-align:center;margin-top:2rem;">
+    <button class="btn btn-ghost" id="s01-listen-btn" onclick="toggleS01Audio()">
+      <span id="s01-listen-icon">🔊</span> Listen
+    </button>
+    <audio id="s01-audio" src="section01.mp3" preload="auto"></audio>
+  </div>
 </section>
 
 <hr class="section-divider">
@@ -935,6 +942,29 @@ function toggleAudio() {
 heroAudio.addEventListener('ended', () => {
   const btn = document.getElementById('listen-btn');
   btn.innerHTML = '<span id="listen-icon">\uD83D\uDD0A</span> Listen';
+  btn.style.borderColor = '';
+  btn.style.color = '';
+});
+
+// Section 01 listen button
+const s01Audio = document.getElementById('s01-audio');
+function toggleS01Audio() {
+  const btn = document.getElementById('s01-listen-btn');
+  if (s01Audio.paused) {
+    s01Audio.play();
+    btn.innerHTML = '<span id="s01-listen-icon">\u23F8</span> Playing\u2026';
+    btn.style.borderColor = 'rgba(255,107,53,0.4)';
+    btn.style.color = 'var(--accent)';
+  } else {
+    s01Audio.pause();
+    btn.innerHTML = '<span id="s01-listen-icon">\uD83D\uDD0A</span> Listen';
+    btn.style.borderColor = '';
+    btn.style.color = '';
+  }
+}
+s01Audio.addEventListener('ended', () => {
+  const btn = document.getElementById('s01-listen-btn');
+  btn.innerHTML = '<span id="s01-listen-icon">\uD83D\uDD0A</span> Listen';
   btn.style.borderColor = '';
   btn.style.color = '';
 });
