@@ -1,0 +1,1089 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>engineer-brain.com — Understanding the Most Overthinking Species on Earth</title>
+<link href="https://fonts.googleapis.com/css2?family=Instrument+Serif:ital@0;1&family=DM+Sans:ital,wght@0,300;0,400;0,500;0,600;0,700;1,400&family=JetBrains+Mono:wght@400;500;600&display=swap" rel="stylesheet">
+<style>
+*, *::before, *::after { margin: 0; padding: 0; box-sizing: border-box; }
+
+:root {
+  --bg: #0a0a0c;
+  --bg-section: #0f0f13;
+  --bg-card: #16161d;
+  --bg-card-alt: #1a1a24;
+  --text: #e8e6e1;
+  --text-dim: #8a8892;
+  --text-muted: #5a5866;
+  --accent: #ff6b35;
+  --accent-glow: #ff6b3533;
+  --accent2: #00d4aa;
+  --accent2-glow: #00d4aa22;
+  --accent3: #7c6aff;
+  --red: #ff4057;
+  --serif: 'Instrument Serif', Georgia, serif;
+  --sans: 'DM Sans', system-ui, sans-serif;
+  --mono: 'JetBrains Mono', monospace;
+}
+
+html { scroll-behavior: smooth; font-size: 16px; }
+body {
+  background: var(--bg);
+  color: var(--text);
+  font-family: var(--sans);
+  line-height: 1.7;
+  overflow-x: hidden;
+  -webkit-font-smoothing: antialiased;
+}
+
+::selection { background: var(--accent); color: #000; }
+
+/* NAV */
+nav {
+  position: fixed; top: 0; left: 0; right: 0; z-index: 100;
+  backdrop-filter: blur(20px) saturate(1.5);
+  -webkit-backdrop-filter: blur(20px) saturate(1.5);
+  background: rgba(10,10,12,0.8);
+  border-bottom: 1px solid rgba(255,255,255,0.05);
+  padding: 0 2rem;
+  height: 60px;
+  display: flex; align-items: center; justify-content: space-between;
+}
+nav .logo {
+  font-family: var(--mono);
+  font-size: 0.85rem;
+  font-weight: 600;
+  color: var(--accent);
+  letter-spacing: -0.02em;
+}
+nav .logo span { color: var(--text-muted); }
+nav ul { list-style: none; display: flex; gap: 1.75rem; }
+nav ul li a {
+  font-size: 0.8rem;
+  color: var(--text-dim);
+  text-decoration: none;
+  font-weight: 500;
+  letter-spacing: 0.02em;
+  transition: color 0.2s;
+}
+nav ul li a:hover { color: var(--text); }
+
+/* HERO */
+.hero {
+  min-height: 100vh;
+  display: flex; flex-direction: column;
+  justify-content: center; align-items: center;
+  text-align: center;
+  padding: 6rem 2rem 4rem;
+  position: relative;
+  overflow: hidden;
+}
+.hero::before {
+  content: '';
+  position: absolute;
+  width: 600px; height: 600px;
+  border-radius: 50%;
+  background: radial-gradient(circle, var(--accent-glow) 0%, transparent 70%);
+  top: 15%; left: 50%; transform: translateX(-50%);
+  pointer-events: none;
+  animation: pulse 6s ease-in-out infinite;
+}
+@keyframes pulse {
+  0%, 100% { opacity: 0.4; transform: translateX(-50%) scale(1); }
+  50% { opacity: 0.7; transform: translateX(-50%) scale(1.15); }
+}
+.hero .badge {
+  font-family: var(--mono);
+  font-size: 0.7rem;
+  color: var(--accent);
+  background: var(--accent-glow);
+  padding: 0.4rem 1rem;
+  border-radius: 100px;
+  border: 1px solid rgba(255,107,53,0.2);
+  margin-bottom: 2.5rem;
+  letter-spacing: 0.06em;
+  text-transform: uppercase;
+  position: relative;
+  animation: fadeInUp 0.8s ease both;
+}
+.hero h1 {
+  font-family: var(--serif);
+  font-size: clamp(2.4rem, 5.5vw, 4.2rem);
+  line-height: 1.15;
+  max-width: 800px;
+  font-weight: 400;
+  position: relative;
+  animation: fadeInUp 0.8s ease 0.15s both;
+}
+.hero h1 em {
+  font-style: italic;
+  color: var(--accent);
+}
+.hero .subtitle {
+  font-size: 1.1rem;
+  color: var(--text-dim);
+  max-width: 540px;
+  margin-top: 1.5rem;
+  line-height: 1.8;
+  animation: fadeInUp 0.8s ease 0.3s both;
+}
+.hero .cta-row {
+  display: flex; gap: 1rem;
+  margin-top: 2.5rem;
+  animation: fadeInUp 0.8s ease 0.45s both;
+}
+.btn {
+  display: inline-flex; align-items: center; gap: 0.5rem;
+  padding: 0.85rem 1.8rem;
+  border-radius: 8px;
+  font-size: 0.9rem;
+  font-weight: 600;
+  font-family: var(--sans);
+  text-decoration: none;
+  transition: all 0.25s;
+  cursor: pointer; border: none;
+}
+.btn-primary {
+  background: var(--accent);
+  color: #000;
+}
+.btn-primary:hover { background: #ff8455; transform: translateY(-1px); box-shadow: 0 8px 30px var(--accent-glow); }
+.btn-ghost {
+  background: transparent;
+  color: var(--text-dim);
+  border: 1px solid rgba(255,255,255,0.1);
+}
+.btn-ghost:hover { border-color: rgba(255,255,255,0.25); color: var(--text); }
+.scroll-hint {
+  position: absolute; bottom: 2rem;
+  font-size: 0.75rem; color: var(--text-muted);
+  font-family: var(--mono);
+  letter-spacing: 0.04em;
+  animation: fadeInUp 0.8s ease 0.6s both;
+}
+
+@keyframes fadeInUp {
+  from { opacity: 0; transform: translateY(20px); }
+  to { opacity: 1; transform: translateY(0); }
+}
+
+/* TICKER */
+.ticker-wrap {
+  overflow: hidden;
+  background: var(--bg-section);
+  border-top: 1px solid rgba(255,255,255,0.04);
+  border-bottom: 1px solid rgba(255,255,255,0.04);
+  padding: 1.2rem 0;
+}
+.ticker {
+  display: flex;
+  animation: scroll 40s linear infinite;
+  width: max-content;
+}
+.ticker span {
+  font-family: var(--mono);
+  font-size: 0.78rem;
+  color: var(--text-muted);
+  white-space: nowrap;
+  padding: 0 2.5rem;
+  letter-spacing: 0.02em;
+}
+.ticker span strong { color: var(--text-dim); font-weight: 600; }
+@keyframes scroll {
+  from { transform: translateX(0); }
+  to { transform: translateX(-50%); }
+}
+
+/* SECTIONS */
+section {
+  padding: 6rem 2rem;
+  max-width: 900px;
+  margin: 0 auto;
+}
+section.wide { max-width: 1100px; }
+.section-label {
+  font-family: var(--mono);
+  font-size: 0.7rem;
+  letter-spacing: 0.1em;
+  text-transform: uppercase;
+  color: var(--accent);
+  margin-bottom: 1.5rem;
+}
+section h2 {
+  font-family: var(--serif);
+  font-size: clamp(1.8rem, 4vw, 2.8rem);
+  font-weight: 400;
+  line-height: 1.2;
+  margin-bottom: 1.5rem;
+}
+section h2 em { font-style: italic; color: var(--accent2); }
+section p.lead {
+  font-size: 1.1rem;
+  color: var(--text-dim);
+  max-width: 650px;
+  line-height: 1.8;
+}
+
+/* TWO COLUMN COMPARE */
+.compare {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 1.5rem;
+  margin-top: 3rem;
+}
+.compare-card {
+  background: var(--bg-card);
+  border: 1px solid rgba(255,255,255,0.05);
+  border-radius: 12px;
+  padding: 2rem;
+  position: relative;
+  overflow: hidden;
+}
+.compare-card::before {
+  content: '';
+  position: absolute;
+  top: 0; left: 0; right: 0;
+  height: 3px;
+}
+.compare-card.normal::before { background: var(--text-muted); }
+.compare-card.engineer::before { background: var(--accent); }
+.compare-card .card-label {
+  font-family: var(--mono);
+  font-size: 0.7rem;
+  text-transform: uppercase;
+  letter-spacing: 0.08em;
+  margin-bottom: 0.75rem;
+}
+.compare-card.normal .card-label { color: var(--text-muted); }
+.compare-card.engineer .card-label { color: var(--accent); }
+.compare-card h3 {
+  font-family: var(--serif);
+  font-size: 1.4rem;
+  font-weight: 400;
+  margin-bottom: 1rem;
+}
+.compare-card p {
+  font-size: 0.92rem;
+  color: var(--text-dim);
+  line-height: 1.7;
+}
+
+/* SPECIES / TIMELINE */
+.species-header {
+  text-align: center;
+  margin-bottom: 3rem;
+}
+.avatar-box {
+  width: 120px; height: 120px;
+  border-radius: 16px;
+  background: linear-gradient(135deg, var(--bg-card), var(--bg-card-alt));
+  border: 1px solid rgba(255,255,255,0.08);
+  display: flex; align-items: center; justify-content: center;
+  font-size: 3rem;
+  margin: 0 auto 1.5rem;
+}
+.species-meta {
+  font-family: var(--mono);
+  font-size: 0.75rem;
+  color: var(--text-muted);
+  letter-spacing: 0.04em;
+}
+
+.timeline { margin-top: 3rem; position: relative; padding-left: 2rem; }
+.timeline::before {
+  content: '';
+  position: absolute; left: 0; top: 0; bottom: 0;
+  width: 2px;
+  background: linear-gradient(to bottom, var(--accent), var(--accent2), var(--accent3));
+  border-radius: 2px;
+}
+.tl-item { margin-bottom: 2.5rem; position: relative; }
+.tl-item::before {
+  content: '';
+  position: absolute; left: -2rem; top: 0.45rem;
+  width: 10px; height: 10px;
+  border-radius: 50%;
+  background: var(--accent);
+  border: 2px solid var(--bg);
+  transform: translateX(-4px);
+}
+.tl-item:nth-child(2)::before { background: var(--accent2); }
+.tl-item:nth-child(3)::before { background: var(--accent3); }
+.tl-item:nth-child(4)::before { background: var(--accent); }
+.tl-item:nth-child(5)::before { background: var(--accent2); }
+.tl-year {
+  font-family: var(--mono);
+  font-size: 0.8rem;
+  color: var(--accent);
+  font-weight: 600;
+  margin-bottom: 0.4rem;
+}
+.tl-item:nth-child(2) .tl-year { color: var(--accent2); }
+.tl-item:nth-child(3) .tl-year { color: var(--accent3); }
+.tl-item p { font-size: 0.92rem; color: var(--text-dim); line-height: 1.7; }
+
+/* STEPS */
+.steps { margin-top: 3rem; counter-reset: step; }
+.step {
+  display: grid;
+  grid-template-columns: 60px 1fr;
+  gap: 1.5rem;
+  margin-bottom: 2.5rem;
+  align-items: start;
+}
+.step-num {
+  width: 48px; height: 48px;
+  border-radius: 12px;
+  background: var(--bg-card);
+  border: 1px solid rgba(255,255,255,0.06);
+  display: flex; align-items: center; justify-content: center;
+  font-family: var(--mono);
+  font-size: 0.85rem;
+  font-weight: 600;
+  color: var(--accent);
+}
+.step h3 {
+  font-family: var(--serif);
+  font-size: 1.2rem;
+  font-weight: 400;
+  margin-bottom: 0.5rem;
+}
+.step p { font-size: 0.9rem; color: var(--text-dim); line-height: 1.7; }
+
+/* STAT GRID */
+.stat-grid {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 1.25rem;
+  margin-top: 3rem;
+}
+.stat-card {
+  background: var(--bg-card);
+  border: 1px solid rgba(255,255,255,0.05);
+  border-radius: 12px;
+  padding: 1.75rem;
+  text-align: center;
+  transition: border-color 0.3s, transform 0.3s;
+}
+.stat-card:hover {
+  border-color: rgba(255,255,255,0.1);
+  transform: translateY(-2px);
+}
+.stat-card .stat-val {
+  font-family: var(--serif);
+  font-size: 2.2rem;
+  font-weight: 400;
+  color: var(--accent);
+  line-height: 1;
+  margin-bottom: 0.5rem;
+}
+.stat-card:nth-child(2) .stat-val { color: var(--accent2); }
+.stat-card:nth-child(3) .stat-val { color: var(--accent3); }
+.stat-card:nth-child(4) .stat-val { color: var(--red); }
+.stat-card:nth-child(5) .stat-val { color: var(--accent2); }
+.stat-card:nth-child(6) .stat-val { color: var(--accent); }
+.stat-card .stat-label {
+  font-size: 0.8rem;
+  color: var(--text-dim);
+  line-height: 1.5;
+}
+
+/* QUOTES */
+.quotes { margin-top: 3rem; }
+.quote-block {
+  border-left: 3px solid var(--accent);
+  padding: 1.5rem 0 1.5rem 2rem;
+  margin-bottom: 2.5rem;
+}
+.quote-block:nth-child(2) { border-color: var(--accent2); }
+.quote-block:nth-child(3) { border-color: var(--accent3); }
+.quote-block:nth-child(4) { border-color: var(--red); }
+.quote-block blockquote {
+  font-family: var(--serif);
+  font-size: 1.3rem;
+  font-style: italic;
+  line-height: 1.6;
+  color: var(--text);
+  margin-bottom: 0.75rem;
+}
+.quote-block cite {
+  font-family: var(--mono);
+  font-size: 0.75rem;
+  color: var(--text-muted);
+  font-style: normal;
+}
+
+/* FAQ */
+.faq { margin-top: 3rem; }
+.faq-item {
+  border-bottom: 1px solid rgba(255,255,255,0.06);
+  padding: 1.5rem 0;
+}
+.faq-q {
+  font-family: var(--sans);
+  font-size: 1rem;
+  font-weight: 600;
+  cursor: pointer;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  color: var(--text);
+  transition: color 0.2s;
+  background: none; border: none; width: 100%;
+  text-align: left;
+  line-height: 1.5;
+}
+.faq-q:hover { color: var(--accent); }
+.faq-q .icon {
+  font-size: 1.4rem;
+  transition: transform 0.3s;
+  color: var(--text-muted);
+  flex-shrink: 0;
+  margin-left: 1rem;
+}
+.faq-item.open .faq-q .icon { transform: rotate(45deg); color: var(--accent); }
+.faq-a {
+  max-height: 0;
+  overflow: hidden;
+  transition: max-height 0.4s ease, padding 0.3s ease;
+}
+.faq-item.open .faq-a {
+  max-height: 500px;
+  padding-top: 1rem;
+}
+.faq-a p {
+  font-size: 0.9rem;
+  color: var(--text-dim);
+  line-height: 1.8;
+}
+
+/* TABLE */
+.table-wrap {
+  margin-top: 2.5rem;
+  overflow-x: auto;
+  border-radius: 12px;
+  border: 1px solid rgba(255,255,255,0.06);
+}
+table {
+  width: 100%;
+  border-collapse: collapse;
+  font-size: 0.88rem;
+}
+thead { background: var(--bg-card); }
+th {
+  padding: 1rem 1.25rem;
+  text-align: left;
+  font-family: var(--mono);
+  font-size: 0.7rem;
+  text-transform: uppercase;
+  letter-spacing: 0.08em;
+  color: var(--text-muted);
+  font-weight: 600;
+}
+td {
+  padding: 1rem 1.25rem;
+  border-top: 1px solid rgba(255,255,255,0.04);
+  color: var(--text-dim);
+}
+tr:hover td { background: rgba(255,255,255,0.015); }
+td:first-child { color: var(--text-muted); font-family: var(--mono); font-size: 0.8rem; }
+td:nth-child(2) { color: var(--text); font-weight: 500; }
+.tag {
+  font-family: var(--mono);
+  font-size: 0.65rem;
+  padding: 0.25rem 0.6rem;
+  border-radius: 100px;
+  display: inline-block;
+}
+.tag-danger { background: rgba(255,64,87,0.15); color: var(--red); }
+.tag-warn { background: rgba(255,107,53,0.15); color: var(--accent); }
+.tag-ok { background: rgba(0,212,170,0.15); color: var(--accent2); }
+
+/* CTA FOOTER */
+.cta-section {
+  text-align: center;
+  padding: 6rem 2rem 8rem;
+  max-width: 650px;
+  margin: 0 auto;
+}
+.cta-section h2 {
+  font-family: var(--serif);
+  font-size: clamp(2rem, 4vw, 2.8rem);
+}
+.cta-section p {
+  color: var(--text-dim);
+  margin-top: 1rem;
+  font-size: 1rem;
+  line-height: 1.8;
+}
+.cta-section .cta-row { justify-content: center; margin-top: 2rem; display: flex; gap: 1rem; }
+
+footer {
+  text-align: center;
+  padding: 2rem;
+  font-size: 0.75rem;
+  color: var(--text-muted);
+  border-top: 1px solid rgba(255,255,255,0.04);
+  font-family: var(--mono);
+}
+
+/* DIVIDER */
+.section-divider {
+  max-width: 900px;
+  margin: 0 auto;
+  border: none;
+  border-top: 1px solid rgba(255,255,255,0.04);
+}
+
+/* RESPONSIVE */
+@media (max-width: 768px) {
+  nav ul { display: none; }
+  .compare { grid-template-columns: 1fr; }
+  .stat-grid { grid-template-columns: 1fr 1fr; }
+  .step { grid-template-columns: 48px 1fr; gap: 1rem; }
+  section { padding: 4rem 1.5rem; }
+}
+@media (max-width: 480px) {
+  .stat-grid { grid-template-columns: 1fr; }
+  .hero .cta-row { flex-direction: column; }
+}
+</style>
+</head>
+<body>
+
+<nav>
+  <div class="logo">engineer-brain<span>.com</span></div>
+  <ul>
+    <li><a href="#idea">The problem</a></li>
+    <li><a href="#species">The species</a></li>
+    <li><a href="#stages">Life stages</a></li>
+    <li><a href="#data">The data</a></li>
+    <li><a href="#quotes">In their words</a></li>
+    <li><a href="#faq">FAQ</a></li>
+  </ul>
+</nav>
+
+<!-- HERO -->
+<header class="hero">
+  <div class="badge">⚠ A Public Service Announcement</div>
+  <h1>One species figured out how to mass-produce <em>overthinking.</em> Their code compiles. Their social skills don't.</h1>
+  <p class="subtitle">There are 25 million engineers in the world. They've built everything you use. They cannot, however, reply to a text message within 48 hours. This site is for everyone who lives with, works with, or accidentally dated one.</p>
+  <div class="cta-row">
+    <a href="#idea" class="btn btn-primary">Begin diagnosis →</a>
+    <a href="#faq" class="btn btn-ghost">Skip to FAQ</a>
+  </div>
+  <div class="scroll-hint">↓ scroll to explore</div>
+</header>
+
+<!-- TICKER -->
+<div class="ticker-wrap">
+  <div class="ticker">
+    <span><strong>72%</strong> of engineers have named a personal side project</span>
+    <span><strong>94%</strong> of those projects remain unfinished</span>
+    <span><strong>3.2 hrs</strong> average time lost to a "quick refactor"</span>
+    <span><strong>$0</strong> revenue generated by personal Kubernetes clusters</span>
+    <span><strong>87%</strong> have mass-replied-all at least once</span>
+    <span><strong>100%</strong> have mass-replied-all and blamed Outlook</span>
+    <span><strong>45 min</strong> avg time explaining why their solution is "elegant"</span>
+    <span><strong>0</strong> non-engineers who asked for that explanation</span>
+    <span><strong>72%</strong> of engineers have named a personal side project</span>
+    <span><strong>94%</strong> of those projects remain unfinished</span>
+    <span><strong>3.2 hrs</strong> average time lost to a "quick refactor"</span>
+    <span><strong>$0</strong> revenue generated by personal Kubernetes clusters</span>
+    <span><strong>87%</strong> have mass-replied-all at least once</span>
+    <span><strong>100%</strong> have mass-replied-all and blamed Outlook</span>
+    <span><strong>45 min</strong> avg time explaining why their solution is "elegant"</span>
+    <span><strong>0</strong> non-engineers who asked for that explanation</span>
+  </div>
+</div>
+
+<!-- SECTION 01 -->
+<section id="idea">
+  <div class="section-label">01 — The big idea</div>
+  <h2>Two types of problem-solving. Engineers only know <em>one.</em></h2>
+  <p class="lead">Every normal human has a simple process: identify the problem, fix it, move on with life. Engineers identified the problem, then identified seventeen sub-problems, architected a framework, wrote a spec, and missed the original deadline by four sprints.</p>
+
+  <div class="compare">
+    <div class="compare-card normal">
+      <div class="card-label">The normal way</div>
+      <h3>Light switch is broken</h3>
+      <p>You call an electrician. The electrician fixes it. You turn the light on. It works. You go about your day. Total time elapsed: 45 minutes. Emotional damage: none.</p>
+    </div>
+    <div class="compare-card engineer">
+      <div class="card-label">The engineer way</div>
+      <h3>Light switch is broken</h3>
+      <p>You research IoT-enabled smart switches. You order a Raspberry Pi. You write a custom firmware. You set up Home Assistant. Your spouse leaves. The original light switch is still broken. Total time elapsed: 3 weekends. Emotional damage: catastrophic.</p>
+    </div>
+  </div>
+</section>
+
+<hr class="section-divider">
+
+<!-- SECTION 02 -->
+<section id="species">
+  <div class="section-label">02 — Meet the species</div>
+
+  <div class="species-header">
+    <div class="avatar-box">🧠</div>
+    <h2>Homo Engineerus</h2>
+    <div class="species-meta">Kingdom: Caffeinata · Class: Overthinkus · Order: Debuggeriformes</div>
+  </div>
+
+  <p class="lead" style="text-align:center; margin: 0 auto;">Known for an extraordinary ability to make simple things complicated, then complaining about the complexity. Identified in the wild by their mechanical keyboard, strong opinions about tabs vs. spaces, and the haunted look of someone who just reviewed a pull request.</p>
+
+  <div class="timeline">
+    <div class="tl-item">
+      <div class="tl-year">Age 7</div>
+      <p>Corrects a teacher's rounding error. Gets first taste of being technically correct — the most intoxicating kind of correct. It becomes a lifestyle.</p>
+    </div>
+    <div class="tl-item">
+      <div class="tl-year">Age 14</div>
+      <p>Builds first website. It looks terrible. Spends three months optimizing the load time to 0.4 seconds. Nobody visits it. Considers this a win because "the architecture is solid."</p>
+    </div>
+    <div class="tl-item">
+      <div class="tl-year">Age 22</div>
+      <p>Graduates with an engineering degree and $80K in student loans. Immediately spends $3,200 on a home lab setup. Cannot explain this decision to their parents. Or themselves.</p>
+    </div>
+    <div class="tl-item">
+      <div class="tl-year">Age 30</div>
+      <p>Has opinions about fourteen programming languages, three Linux distros, and the correct way to make coffee (pour-over, obviously, with water at exactly 96°C, measured with a thermocouple they soldered themselves).</p>
+    </div>
+    <div class="tl-item">
+      <div class="tl-year">Age 45</div>
+      <p>Finally admits the real architecture was the friends they debugged with along the way. Still refuses to use a GUI when a terminal command exists. Will die on this hill.</p>
+    </div>
+  </div>
+</section>
+
+<hr class="section-divider">
+
+<!-- SECTION 03 -->
+<section id="stages">
+  <div class="section-label">03 — How it works</div>
+  <h2>The Engineer Decision Process, <em>explained like you're 17.</em></h2>
+  <p class="lead">An engineer's brain processes every decision through an elaborate pipeline that would be impressive if it didn't take 4x longer than just doing the thing.</p>
+
+  <div class="steps">
+    <div class="step">
+      <div class="step-num">1</div>
+      <div>
+        <h3>Encounter a simple problem</h3>
+        <p>Something doesn't work. A normal person would fix it. The engineer's brain immediately activates a threat-assessment protocol that classifies the problem by severity, root cause probability, and whether it could be solved "more elegantly."</p>
+      </div>
+    </div>
+    <div class="step">
+      <div class="step-num">2</div>
+      <div>
+        <h3>Research phase (endless)</h3>
+        <p>Open 47 browser tabs. Read three Stack Overflow threads. Watch a conference talk from 2019. Discover a new tool that "solves this perfectly." Spend two hours learning that tool. Realize it doesn't actually solve the original problem.</p>
+      </div>
+    </div>
+    <div class="step">
+      <div class="step-num">3</div>
+      <div>
+        <h3>Architecture astronautics</h3>
+        <p>Design a solution so abstract and future-proof it could survive a nuclear apocalypse, a database migration, and a reorg — simultaneously. The original problem was a broken link on page 4 of the website.</p>
+      </div>
+    </div>
+    <div class="step">
+      <div class="step-num">4</div>
+      <div>
+        <h3>Implementation & despair</h3>
+        <p>Begin building. Encounter an edge case. Redesign everything. Encounter another edge case. Consult a rubber duck. The duck has no answers. Question career choices. Push to production at 2am. It works. No one knows why. Never touch it again.</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<hr class="section-divider">
+
+<!-- SECTION 04 — THE DATA -->
+<section id="data" class="wide">
+  <div class="section-label">04 — The hard data</div>
+  <h2>This isn't anecdotal. <em>The numbers don't lie.</em></h2>
+  <p class="lead">We surveyed absolutely no one, but these statistics feel spiritually true, and honestly that's the same standard engineers use when estimating project timelines.</p>
+
+  <div class="stat-grid">
+    <div class="stat-card">
+      <div class="stat-val">47</div>
+      <div class="stat-label">Average browser tabs open at any given moment</div>
+    </div>
+    <div class="stat-card">
+      <div class="stat-val">∞</div>
+      <div class="stat-label">Time spent on "quick 5-minute fix" before giving up</div>
+    </div>
+    <div class="stat-card">
+      <div class="stat-val">2.4x</div>
+      <div class="stat-label">More likely to correct you than to comfort you</div>
+    </div>
+    <div class="stat-card">
+      <div class="stat-val">$0</div>
+      <div class="stat-label">ROI on home Kubernetes cluster running a to-do app</div>
+    </div>
+    <div class="stat-card">
+      <div class="stat-val">83%</div>
+      <div class="stat-label">Of "I'll automate that" promises that created more work</div>
+    </div>
+    <div class="stat-card">
+      <div class="stat-val">1:17</div>
+      <div class="stat-label">Ratio of time coding to time configuring their editor</div>
+    </div>
+  </div>
+</section>
+
+<hr class="section-divider">
+
+<!-- SECTION 05 — SUBSPECIES TABLE -->
+<section class="wide">
+  <div class="section-label">05 — Field guide</div>
+  <h2>Known subspecies. <em>Identified in the wild.</em></h2>
+  <p class="lead">Not all engineers are the same. They come in several devastating flavors, each with their own unique way of making your life harder while genuinely believing they're helping.</p>
+
+  <div class="table-wrap">
+    <table>
+      <thead>
+        <tr>
+          <th>#</th>
+          <th>Subspecies</th>
+          <th>Habitat</th>
+          <th>Catchphrase</th>
+          <th>Threat Level</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr>
+          <td>01</td>
+          <td>The Backend Purist</td>
+          <td>Darkened rooms, no CSS in sight</td>
+          <td>"That's a frontend problem."</td>
+          <td><span class="tag tag-warn">Moderate</span></td>
+        </tr>
+        <tr>
+          <td>02</td>
+          <td>The DevOps Evangelist</td>
+          <td>Standing behind you, mentioning Docker</td>
+          <td>"Have you considered containerizing that?"</td>
+          <td><span class="tag tag-danger">Critical</span></td>
+        </tr>
+        <tr>
+          <td>03</td>
+          <td>The Mechanical Engineer</td>
+          <td>Garage. Always the garage.</td>
+          <td>"I could build that for less."</td>
+          <td><span class="tag tag-ok">Low</span></td>
+        </tr>
+        <tr>
+          <td>04</td>
+          <td>The Data Scientist</td>
+          <td>Jupyter notebooks from 2019</td>
+          <td>"The data suggests—" [40 min later] "—nothing conclusive."</td>
+          <td><span class="tag tag-warn">Moderate</span></td>
+        </tr>
+        <tr>
+          <td>05</td>
+          <td>The Civil Engineer</td>
+          <td>Construction sites, pointing at things</td>
+          <td>"That load-bearing wall is not going anywhere."</td>
+          <td><span class="tag tag-ok">Low</span></td>
+        </tr>
+        <tr>
+          <td>06</td>
+          <td>The Full-Stack "Architect"</td>
+          <td>Every Slack channel, simultaneously</td>
+          <td>"Let me whiteboard this real quick." (2 hrs later)</td>
+          <td><span class="tag tag-danger">Critical</span></td>
+        </tr>
+        <tr>
+          <td>07</td>
+          <td>The AI/ML Engineer</td>
+          <td>Twitter/X, correcting people about LLMs</td>
+          <td>"Actually, it's a transformer, not AI."</td>
+          <td><span class="tag tag-danger">Critical</span></td>
+        </tr>
+        <tr>
+          <td>08</td>
+          <td>The Electrical Engineer</td>
+          <td>Surrounded by oscilloscopes and regret</td>
+          <td>"The simulation looked fine."</td>
+          <td><span class="tag tag-warn">Moderate</span></td>
+        </tr>
+      </tbody>
+    </table>
+  </div>
+</section>
+
+<hr class="section-divider">
+
+<!-- SECTION 06 — QUOTES -->
+<section id="quotes">
+  <div class="section-label">06 — In their own words</div>
+  <h2>Engineers were dropping <em>unhinged takes</em> before Twitter existed.</h2>
+
+  <div class="quotes">
+    <div class="quote-block">
+      <blockquote>"It works on my machine."</blockquote>
+      <cite>— Every engineer, since the dawn of computation, as a legal defense</cite>
+    </div>
+    <div class="quote-block">
+      <blockquote>"I'm not arguing. I'm explaining why I'm right."</blockquote>
+      <cite>— Engineers in every meeting, mistaking condescension for clarity</cite>
+    </div>
+    <div class="quote-block">
+      <blockquote>"Yeah, I could just use the existing tool, but what if I built my own?"</blockquote>
+      <cite>— Famous last words, uttered 4.7 billion times across human history</cite>
+    </div>
+    <div class="quote-block">
+      <blockquote>"Give me six hours to chop down a tree and I will spend the first four sharpening the axe. Then I'll write a script to automate the sharpening. Then the tree will still be there on Monday."</blockquote>
+      <cite>— Abraham Lincoln, if he'd been a software engineer</cite>
+    </div>
+  </div>
+</section>
+
+<hr class="section-divider">
+
+<!-- SECTION 07 — FAQ -->
+<section id="faq">
+  <div class="section-label">07 — Frequently asked</div>
+  <h2>Wait, but what about…</h2>
+
+  <div class="faq">
+    <div class="faq-item">
+      <button class="faq-q">Is my partner an engineer, or just bad at texting? <span class="icon">+</span></button>
+      <div class="faq-a"><p>If their text response arrives 6 hours late and contains a detailed explanation of *why* they were late — including timestamps, a root cause analysis, and a suggestion that you "should really switch to Signal for better delivery receipts" — they are an engineer. A normal bad texter would just say "lol sorry."</p></div>
+    </div>
+    <div class="faq-item">
+      <button class="faq-q">Can engineers be cured? <span class="icon">+</span></button>
+      <div class="faq-a"><p>No. The condition is permanent. However, symptoms can be managed with regular exposure to sunlight, non-technical hobbies (they will resist), and the occasional firm reminder that "nobody asked you to optimize the dishwasher loading pattern." Support groups exist, but they keep getting sidetracked debating which video conferencing tool to use for the meetings.</p></div>
+    </div>
+    <div class="faq-item">
+      <button class="faq-q">My engineer says "it's a simple fix." Should I believe them? <span class="icon">+</span></button>
+      <div class="faq-a"><p>Absolutely not. "Simple fix" in engineer-speak translates to: "I have not yet encountered the 14 things that will go wrong, but my confidence is currently high and my caffeine level is optimal." Multiply any time estimate they give you by π (3.14). This is known as the Engineer Uncertainty Principle.</p></div>
+    </div>
+    <div class="faq-item">
+      <button class="faq-q">Why do engineers always say "it depends"? <span class="icon">+</span></button>
+      <div class="faq-a"><p>Because to an engineer, every question is actually seventeen questions wearing a trench coat. "Should we use React?" depends on the team size, the bundle size, the legacy codebase, the deployment target, whether Mercury is in retrograde, and at least four other variables they'll need a whiteboard session to enumerate. They're not being evasive. Their brain literally cannot produce a simple answer. It's a hardware limitation.</p></div>
+    </div>
+    <div class="faq-item">
+      <button class="faq-q">Is it true engineers have no social skills? <span class="icon">+</span></button>
+      <div class="faq-a"><p>This is a harmful stereotype and we won't perpetuate it. Engineers have *excellent* social skills — with other engineers. They can bond over shared hatred of a programming language, debate architecture patterns for 3 hours straight, and forge lifelong friendships over a mutual appreciation for mechanical keyboards. It's the rest of humanity they struggle with, mostly because the rest of humanity keeps saying things like "just make it work" without providing acceptance criteria.</p></div>
+    </div>
+    <div class="faq-item">
+      <button class="faq-q">I'm an engineer and I feel personally attacked. <span class="icon">+</span></button>
+      <div class="faq-a"><p>That's not a question. But we appreciate you reading this far instead of closing the tab to go refactor something. The fact that you feel attacked means the pattern-matching algorithm in your brain is working correctly. Consider this a successful unit test of your self-awareness. Now go touch grass. (Your smart sprinkler system doesn't count.)</p></div>
+    </div>
+  </div>
+</section>
+
+<!-- CTA -->
+<div class="cta-section">
+  <h2>Still here? Impressive attention span for an engineer.</h2>
+  <p>Share this with the engineer in your life. They'll spend 20 minutes explaining why the site's CSS could be "more performant" instead of acknowledging they feel seen.</p>
+  <div class="cta-row">
+    <a href="#" class="btn btn-primary" onclick="openShareModal(); return false;">Share with an engineer</a>
+    <a href="#" class="btn btn-ghost" id="src-btn" onclick="runSourceCode(); return false;">View source code</a>
+  </div>
+</div>
+
+<footer>
+  A project of <span style="color:var(--text-dim)">the internet</span> · Not peer-reviewed · Not sorry · © 2026 engineer-brain.exe
+</footer>
+
+<script>
+// Share modal
+function openShareModal() {
+  const overlay = document.createElement('div');
+  overlay.style.cssText = 'position:fixed;inset:0;z-index:999;background:rgba(0,0,0,0.85);display:flex;align-items:center;justify-content:center;backdrop-filter:blur(8px);cursor:pointer;animation:fadeInUp 0.3s ease;';
+  overlay.onclick = () => overlay.remove();
+
+  const modal = document.createElement('div');
+  modal.onclick = e => e.stopPropagation();
+  modal.style.cssText = 'background:var(--bg-card);border:1px solid rgba(255,255,255,0.08);border-radius:16px;padding:2.5rem;max-width:460px;width:90%;position:relative;';
+
+  const options = [
+    { icon: '🔀', label: 'Via pull request', sub: 'Requires approval from 2 reviewers' },
+    { icon: '💬', label: 'Via Slack (passive-aggressive)', sub: 'Sent with "just curious if you saw this"' },
+    { icon: '📝', label: 'Via TODO comment', sub: 'They\'ll get to it eventually (they won\'t)' },
+    { icon: '📄', label: 'Via RFC document', sub: 'Includes 6-page cost-benefit analysis' },
+    { icon: '💾', label: 'Via commit message', sub: 'git commit -m "lol read this"' },
+    { icon: '📟', label: 'Via PagerDuty alert', sub: 'SEV-1: engineer not self-aware' },
+  ];
+
+  modal.innerHTML = `
+    <div style="font-family:var(--mono);font-size:0.7rem;color:var(--accent);text-transform:uppercase;letter-spacing:0.08em;margin-bottom:0.75rem;">Select delivery method</div>
+    <div style="font-family:var(--serif);font-size:1.6rem;margin-bottom:0.5rem;">Share with an engineer</div>
+    <div style="font-size:0.85rem;color:var(--text-muted);margin-bottom:1.75rem;line-height:1.6;">Choose the protocol they\'ll least likely ignore.<br>Spoiler: they\'ll critique the font first.</div>
+    <div id="share-options">${options.map((o, i) => `
+      <button class="share-opt" data-i="${i}" style="
+        display:flex;align-items:center;gap:1rem;width:100%;padding:0.85rem 1rem;
+        background:rgba(255,255,255,0.02);border:1px solid rgba(255,255,255,0.06);
+        border-radius:10px;margin-bottom:0.6rem;cursor:pointer;text-align:left;
+        transition:all 0.2s;font-family:var(--sans);
+      ">
+        <span style="font-size:1.3rem;flex-shrink:0;">${o.icon}</span>
+        <div>
+          <div style="color:var(--text);font-size:0.9rem;font-weight:500;">${o.label}</div>
+          <div style="color:var(--text-muted);font-size:0.75rem;margin-top:0.15rem;">${o.sub}</div>
+        </div>
+      </button>
+    `).join('')}</div>
+    <div id="share-result" style="display:none;text-align:center;padding:1.5rem 0 0.5rem;"></div>
+  `;
+
+  overlay.appendChild(modal);
+  document.body.appendChild(overlay);
+
+  // Hover effects
+  modal.querySelectorAll('.share-opt').forEach(btn => {
+    btn.onmouseenter = () => {
+      btn.style.borderColor = 'rgba(255,107,53,0.3)';
+      btn.style.background = 'rgba(255,107,53,0.06)';
+    };
+    btn.onmouseleave = () => {
+      btn.style.borderColor = 'rgba(255,255,255,0.06)';
+      btn.style.background = 'rgba(255,255,255,0.02)';
+    };
+    btn.onclick = () => handleShare(modal);
+  });
+}
+
+function handleShare(modal) {
+  const optionsEl = modal.querySelector('#share-options');
+  const resultEl = modal.querySelector('#share-result');
+
+  // Copy URL to clipboard
+  navigator.clipboard.writeText(window.location.href).catch(() => {});
+
+  optionsEl.style.transition = 'opacity 0.3s, max-height 0.4s';
+  optionsEl.style.opacity = '0';
+  optionsEl.style.maxHeight = '0';
+  optionsEl.style.overflow = 'hidden';
+
+  setTimeout(() => {
+    optionsEl.style.display = 'none';
+    resultEl.style.display = 'block';
+    resultEl.innerHTML = `
+      <div style="font-size:2.5rem;margin-bottom:1rem;">📋</div>
+      <div style="font-family:var(--serif);font-size:1.3rem;color:var(--text);margin-bottom:0.5rem;">Link copied to clipboard.</div>
+      <div style="color:var(--text-dim);font-size:0.85rem;line-height:1.7;margin-bottom:1.25rem;">All protocols route to the same place.<br>They\'ll critique the CSS before reading it.</div>
+      <div style="font-family:var(--mono);font-size:0.7rem;color:var(--text-muted);background:rgba(255,255,255,0.03);padding:0.6rem 1rem;border-radius:8px;border:1px solid rgba(255,255,255,0.05);">
+        Status: <span style="color:var(--accent2);">DELIVERED</span> · ETA to acknowledgment: <span style="color:var(--accent);">3–5 business days</span>
+      </div>
+    `;
+    resultEl.style.animation = 'fadeInUp 0.4s ease';
+  }, 350);
+}
+
+// Source code easter egg
+let srcClicks = 0;
+function runSourceCode() {
+  srcClicks++;
+  if (srcClicks === 1) {
+    showTerminal();
+  } else if (srcClicks === 2) {
+    document.getElementById('src-btn').style.transition = 'transform 0.3s';
+    document.getElementById('src-btn').textContent = 'Okay fine, here\'s the real source';
+    showTerminal2();
+  } else {
+    // Button runs away from cursor
+    const btn = document.getElementById('src-btn');
+    btn.textContent = ["Stop it.", "I said no.", "Go outside.", "Touch grass.", "Open a terminal instead.", "You're proving the site right.", "Peak engineer behavior."][Math.min(srcClicks - 3, 6)];
+    const x = (Math.random() - 0.5) * 300;
+    const y = (Math.random() - 0.5) * 100;
+    btn.style.transform = `translate(${x}px, ${y}px)`;
+  }
+}
+
+function showTerminal() {
+  const overlay = document.createElement('div');
+  overlay.id = 'term-overlay';
+  overlay.style.cssText = 'position:fixed;inset:0;z-index:999;background:rgba(0,0,0,0.85);display:flex;align-items:center;justify-content:center;backdrop-filter:blur(8px);cursor:pointer;';
+  overlay.onclick = () => overlay.remove();
+  const box = document.createElement('div');
+  box.style.cssText = 'background:#0d0d0d;border:1px solid rgba(255,255,255,0.1);border-radius:12px;padding:1.5rem;max-width:600px;width:90%;font-family:var(--mono);font-size:0.8rem;line-height:1.8;color:#00d4aa;overflow:hidden;';
+  box.onclick = e => e.stopPropagation();
+  overlay.appendChild(box);
+  document.body.appendChild(overlay);
+
+  const lines = [
+    '$ git clone engineer-brain.com/source',
+    'Cloning into \'engineer-brain\'...',
+    'remote: Enumerating objects: 4,817,233',
+    'remote: Counting objects: 100% (∞/∞)',
+    'error: repository is 847 TB',
+    '$ du -sh node_modules/',
+    '847 TB   node_modules/',
+    '$ cat README.md',
+    '# engineer-brain',
+    '> "I\'ll document this later" — commit msg, 2019',
+    '> Last updated: never',
+    '$ cat package.json | jq \'.dependencies | length\'',
+    '2,847',
+    '$ cat .env',
+    'PERMISSION_DENIED: nice try lol',
+    '$ grep -r "TODO" src/',
+    'Found 1,247 TODOs. 0 DONEs.',
+    '$ npm run build',
+    '> Compiling mass-overthinking-engine...',
+    '> ERROR: feelings.js is not a module',
+    '> WARNING: social-skills not found in node_modules',
+    '> Build failed. As is tradition.',
+    '',
+    '<span style="color:#ff6b35">[ click anywhere to close & accept your fate ]</span>',
+  ];
+
+  let i = 0;
+  function type() {
+    if (i < lines.length) {
+      box.innerHTML += lines[i] + '<br>';
+      box.scrollTop = box.scrollHeight;
+      i++;
+      setTimeout(type, lines[i-1].startsWith('$') ? 500 : lines[i-1].startsWith('>') ? 350 : 200);
+    }
+  }
+  type();
+}
+
+function showTerminal2() {
+  const overlay = document.createElement('div');
+  overlay.id = 'term-overlay2';
+  overlay.style.cssText = 'position:fixed;inset:0;z-index:999;background:rgba(0,0,0,0.85);display:flex;align-items:center;justify-content:center;backdrop-filter:blur(8px);cursor:pointer;';
+  overlay.onclick = () => overlay.remove();
+  const box = document.createElement('div');
+  box.style.cssText = 'background:#0d0d0d;border:1px solid rgba(255,255,255,0.1);border-radius:12px;padding:2rem;max-width:500px;width:90%;font-family:var(--mono);font-size:0.85rem;text-align:center;color:var(--text-dim);line-height:2;';
+  box.onclick = e => e.stopPropagation();
+  box.innerHTML = '<div style="font-size:3rem;margin-bottom:1rem;">🪞</div><div style="color:var(--text);font-family:var(--serif);font-size:1.4rem;margin-bottom:0.5rem;">The real source code was inside you all along.</div><div style="color:var(--text-muted);font-size:0.8rem;margin-top:1rem;">Just kidding. It\'s spaghetti. It\'s always spaghetti.<br><br><span style="color:#ff6b35">[ click to close ]</span></div>';
+  overlay.appendChild(box);
+  document.body.appendChild(overlay);
+}
+
+// FAQ accordion
+document.querySelectorAll('.faq-q').forEach(btn => {
+  btn.addEventListener('click', () => {
+    const item = btn.parentElement;
+    const wasOpen = item.classList.contains('open');
+    document.querySelectorAll('.faq-item').forEach(i => i.classList.remove('open'));
+    if (!wasOpen) item.classList.add('open');
+  });
+});
+
+// Intersection Observer for fade-in
+const observer = new IntersectionObserver((entries) => {
+  entries.forEach(entry => {
+    if (entry.isIntersecting) {
+      entry.target.style.opacity = '1';
+      entry.target.style.transform = 'translateY(0)';
+    }
+  });
+}, { threshold: 0.1, rootMargin: '0px 0px -40px 0px' });
+
+document.querySelectorAll('section, .compare-card, .stat-card, .step, .quote-block, .tl-item').forEach(el => {
+  el.style.opacity = '0';
+  el.style.transform = 'translateY(24px)';
+  el.style.transition = 'opacity 0.6s ease, transform 0.6s ease';
+  observer.observe(el);
+});
+</script>
+
+</body>
+</html>
